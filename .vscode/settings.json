@@ -1,0 +1,7 @@
+{
+    "python.linting.pylintEnabled": true,
+    "python.linting.pydocstyleEnabled": false,
+    "python.linting.enabled": true,
+    "python.pythonPath": "c:\\Projects\\coffee_machine\\.venv\\Scripts\\python.exe"
+}
+
