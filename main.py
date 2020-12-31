@@ -33,17 +33,17 @@ resources = {
 }
 
 
-def print_resources:
+def print_resources():
         print(f"""
             Water:  {resources["water"]}
             Milk:   {resources["milk"]}    
             Coffee: {resources["coffee"]} 
-            Money:  {money:.2f}  
+            Money:  {MONEY:.2f}  
          """)
 
-#TODO make better logic for resource checker 
 
-# Check if resources sufficient
+
+# Check if resources are sufficient to make chcoic returns false if unable to make 
 def resource_checker(choice):
     if resources["water"] < MENU[choice]["ingredients"]["water"]:
         print(f"""
@@ -65,12 +65,49 @@ def resource_checker(choice):
         """)
         return False
     else:
-        return true 
+        return True 
 
- #TODO Process coins.
-change = {
 
-}
+def calculate_cash(drink_choice):
+    total = 0
+    remaining = MENU[drink_choice][cost]
+    print('Your drink costs {MENU[drink_choice][cost]} please insert enter exact amount')
+
+    dollars = input('Please insert dollars if none enter 0')
+    if dollars > 0:
+        total += dollars * 1.00
+        remaining -= total
+        print('Your drink costs {MENU[drink_choice][cost]} you have {remaning:.2f}')
+
+    quarters = input('Please insert quarters if none enter 0')
+    if dollars > 0:
+        total += quarters * 0.25
+        remaining -= total
+        print('Your drink costs {MENU[drink_choice][cost]} you have {remaning:.2f}')
+
+    dimes = input('Please insert dimes if none enter 0')
+    if dollars > 0:
+        total += dollars * .10
+        remaining -= total
+        print('Your drink costs {MENU[drink_choice][cost]} you have {remaning:.2f}')
+
+    nickles = input('Please insert nickles if none enter 0')
+    if dollars > 0:
+        total += dollars * 1.00
+        remaining -= total
+        print('Your drink costs {MENU[drink_choice][cost]} you have {remaning:.2f}')
+
+    pennies = input('Please insert pennies if none enter 0')
+    if dollars > 0:
+        total += dollars * 1.00
+        remaining -= total
+        print('Your drink costs {MENU[drink_choice][cost]} you have {remaning:.2f}')
+
+
+
+
+
+
 # a. If there are sufficient resources to make the drink selected, then the program should
 # prompt the user to insert coins.
 # b. Remember that quarters = $0.25, dimes = $0.10, nickles = $0.05, pennies = $0.01
@@ -116,6 +153,6 @@ menu_choice = input('What would you like? (espresso/latte/cappuccino):')
 
 
 if menu_choice == "report":
-
+    pass
 
 resource_checker(menu_choice)
