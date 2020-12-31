@@ -68,7 +68,9 @@ def resource_checker(choice):
         return true 
 
  #TODO Process coins.
+change = {
 
+}
 # a. If there are sufficient resources to make the drink selected, then the program should
 # prompt the user to insert coins.
 # b. Remember that quarters = $0.25, dimes = $0.10, nickles = $0.05, pennies = $0.01
