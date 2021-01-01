@@ -24,7 +24,7 @@ MENU = {
     }
 }
 
-MONEY = 0.00
+money = 0.00
 
 resources = {
     "water": 5,
@@ -32,16 +32,13 @@ resources = {
     "coffee": 100,
 }
 
-
 def print_resources():
         print(f"""
             Water:  {resources["water"]}
             Milk:   {resources["milk"]}    
             Coffee: {resources["coffee"]} 
-            Money:  {MONEY:.2f}  
+            money:  {money:.2f}  
          """)
-
-
 
 # Check if resources are sufficient to make chcoic returns false if unable to make 
 def resource_checker(choice):
@@ -67,69 +64,66 @@ def resource_checker(choice):
     else:
         return True 
 
-
 def calculate_cash(drink_choice):
     total = 0
-    remaining = MENU[drink_choice][cost]
-    print('Your drink costs {MENU[drink_choice][cost]} please insert enter exact amount')
+    cost = MENU[drink_choice]["cost"]
+    print(f'Your drink costs {MENU[drink_choice]["cost"]:.2f} please insert enter exact amount')
 
-    dollars = input('Please insert dollars if none enter 0')
+    dollars = int(input('Please insert dollars if none enter 0:  '))
     if dollars > 0:
         total += dollars * 1.00
-        remaining -= total
-        print('Your drink costs {MENU[drink_choice][cost]} you have {remaning:.2f}')
+        remaining = cost - total
+        print(f'Your drink costs {MENU[drink_choice]["cost"]:.2f} you have ${remaining:.2f} remaining \n')
 
-    quarters = input('Please insert quarters if none enter 0')
-    if dollars > 0:
+    quarters = int(input('Please insert quarters if none enter 0:  '))
+    if quarters > 0:
         total += quarters * 0.25
-        remaining -= total
-        print('Your drink costs {MENU[drink_choice][cost]} you have {remaning:.2f}')
+        remaining = cost - total
+        print(f'Your drink costs {MENU[drink_choice]["cost"]:.2f} you have ${remaining:.2f} remaining \n')
 
-    dimes = input('Please insert dimes if none enter 0')
-    if dollars > 0:
-        total += dollars * .10
-        remaining -= total
-        print('Your drink costs {MENU[drink_choice][cost]} you have {remaning:.2f}')
+    dimes = int(input('Please insert dimes if none enter 0:  '))
+    if dimes > 0:
+        total += dollars * 0.10
+        remaining = cost -total
+        print(f'Your drink costs {MENU[drink_choice]["cost"]:.2f} you have ${remaining:.2f} remaining \n')
 
-    nickles = input('Please insert nickles if none enter 0')
-    if dollars > 0:
-        total += dollars * 1.00
-        remaining -= total
-        print('Your drink costs {MENU[drink_choice][cost]} you have {remaning:.2f}')
+    nickles = int(input('Please insert nickles if none enter 0:  '))
+    if nickles > 0:
+        total += nickles * 0.05
+        remaining = cost -total
+        print(f'Your drink costs {MENU[drink_choice]["cost"]:.2f} you have ${remaining:.2f} remaining \n')
 
-    pennies = input('Please insert pennies if none enter 0')
-    if dollars > 0:
-        total += dollars * 1.00
-        remaining -= total
-        print('Your drink costs {MENU[drink_choice][cost]} you have {remaning:.2f}')
-
-
-
-
+    pennies = int(input('Please insert pennies if none enter 0:  '))
+    if pennies > 0:
+        total += pennies * 0.01
+        remaining = cost -total
+        print(f'Your drink costs {MENU[drink_choice]["cost"]:.2f} you have ${remaining:.2f} remaining \n')
+    
+    return total
 
 
-# a. If there are sufficient resources to make the drink selected, then the program should
-# prompt the user to insert coins.
-# b. Remember that quarters = $0.25, dimes = $0.10, nickles = $0.05, pennies = $0.01
-# c. Calculate the monetary value of the coins inserted. E.g. 1 quarter, 2 dimes, 1 nickel, 2
-# pennies = 0.25 + 0.1 x 2 + 0.05 + 0.01 x 2 = $0.52
+def ammount_correct(inserted,expected):
+    if inserted == expected:
+        print("Transaction successful amount correct")
+        global money 
+        money += expected
+        return True
+    
+    elif inserted < expected:
+        print("Sorry that's not enough money. {inserted} refunded.")
+        return False
 
-#TODO Check transaction successful?
-
-# a. Check that the user has inserted enough money to purchase the drink they selected.
-# E.g Latte cost $2.50, but they only inserted $0.52 then after counting the coins the
-# program should say “Sorry that's not enough money. Money refunded.”.
-# b. But if the user has inserted enough money, then the cost of the drink gets added to the
-# machine as the profit and this will be reflected the next time “report” is triggered. E.g.
-# Water: 100ml
-# Milk: 50ml
-# Coffee: 76g
-# Money: $2.5
-# c. If the user has inserted too much money, the machine should offer change.
-# E.g. “Here is $2.45 dollars in change.” The change should be rounded to 2 decimal
-# places.
+    elif inserted > expected:
+        global money
+        refund = inserted - expected
+        money += expected
+        print("Transaction successful. “Here is ${refund} dollars in change.")
+        return True
 
 #TODO Make Coffee.
+def make_coffee():
+    pass
+
 
 # a. If the transaction is successful and there are enough resources to make the drink the
 # user selected, then the ingredients to make the drink should be deducted from the
@@ -138,21 +132,30 @@ def calculate_cash(drink_choice):
 # Water: 300ml
 # Milk: 200ml
 # Coffee: 100g
-# Money: $0
+# money: $0
 # Report after purchasing latte:
 # Water: 100ml
 # Milk: 50ml
 # Coffee: 76g
-# Money: $2.5
+# money: $2.5
+
+
+#TODO If there are sufficient resources to make the drink selected, then the program should
+
+
 
 
 
 #define main loop
 
 menu_choice = input('What would you like? (espresso/latte/cappuccino):')
+print('\n')
 
+test = calculate_cash(menu_choice)
 
 if menu_choice == "report":
     pass
 
-resource_checker(menu_choice)
+print(f'test:.2f')
+
+#resource_checker(menu_choice)
